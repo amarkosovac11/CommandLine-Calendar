@@ -23,7 +23,7 @@ namespace CommandLineCalendar
 
                 //SELECT OPTION
                 Console.WriteLine("...........................................");
-                Console.WriteLine("1.View Month 2.Add Task 3.View Task 4.Exit");
+                Console.WriteLine("1.View Month 2.Add Task 3.View Task 4.Delete Event 5.Exit");
                 option = Convert.ToInt32(Console.ReadLine());
 
                 //IF ELSE FOR OPTIONS SELECT
@@ -44,9 +44,13 @@ namespace CommandLineCalendar
                 {
                     viewTasks();
                 }
-                
+                else if (option ==4)
+                {
+                    deleteEvent();
+                }
+
             }
-            while (option != 4);
+            while (option != 5);
         }
 
         //FUNCTION FOR ADDING EVENTS
@@ -70,15 +74,49 @@ namespace CommandLineCalendar
             events.Add(newEvent);
             Console.WriteLine($"Event added: {newEvent}");
 
-            File.AppendAllText("tekst.txt", newEvent.ToString() + Environment.NewLine);
+            File.AppendAllText("events.txt", newEvent.ToString() + Environment.NewLine);
         }
 
-        
+
+        //FUNCTION FOR DELETING EVENTS
+        static void deleteEvent()
+        {
+            Console.WriteLine("Enter the date of the event to delete:");
+            Console.WriteLine("Input day: ");
+            int day = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Input month: ");
+            int month = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Input year: ");
+            int year = Convert.ToInt32(Console.ReadLine());
+
+            Event eventToDelete = null;
+            for (int i = 0; i < events.Count; i++)
+            {
+                if (events[i].getEventDay() == day && events[i].getEventMonth() == month && events[i].getEventYear() == year)
+                {
+                    eventToDelete = events[i];
+                    break;
+                }
+            }
+
+
+            if (eventToDelete != null)
+            {
+                events.Remove(eventToDelete);
+                Console.WriteLine("Event deleted successfully.");
+            }
+            else
+            {
+                Console.WriteLine("No event found on the specified date.");
+            }
+        }
+
+
         //FUNCTION FOR VIEWING TASKS
         static void viewTasks()
         {
             Console.WriteLine("Your tasks:");
-            
+
             for (int i = 0; i < events.Count; i++)
             {
                 Event ev = events[i];
@@ -93,7 +131,7 @@ namespace CommandLineCalendar
             DateTime firstDayOfMonth = new DateTime(year, month, 1);
             int daysInMonth = DateTime.DaysInMonth(year, month);
 
-            Console.WriteLine( firstDayOfMonth.ToString("MMMM yyyy", CultureInfo.InvariantCulture));
+            Console.WriteLine(firstDayOfMonth.ToString("MMMM yyyy", CultureInfo.InvariantCulture));
             Console.WriteLine("Mon Tue Wed Thu Fri Sat Sun");
 
             int currentDayOfWeek = (int)firstDayOfMonth.DayOfWeek;
@@ -179,7 +217,7 @@ namespace CommandLineCalendar
         public override string ToString()
         {
             return $"{eventDay} {eventMonth} {eventYear} {eventDesc}";
-            
+
         }
     }
 }
