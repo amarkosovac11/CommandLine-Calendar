@@ -1,0 +1,82 @@
+body {
+    background-color: black;
+    color: white; /* Set default text color to white for contrast */
+    font-family: Arial, sans-serif; /* Optional: Set a font family */
+}
+
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for 7 days */
+    margin-top: 20px;
+}
+
+.day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #ccc;
+    padding: 10px;
+    min-height: 50px;
+    text-align: center;
+    background-color: #333;
+    text-align: center;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.day-header {
+    font-weight: bold;
+    background-color: #555;
+}
+
+#calendar-controls {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#calendar-controls button {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #ffeb3b;
+    color: black;
+    border: none;
+    border-radius: 5px;
+}
+
+#calendar-controls button:hover {
+    background-color: #ffc107;
+}
+
+#calendar-controls span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#event-form {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#event-form input, #event-form button {
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#event-form button {
+    background-color: #ffeb3b;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#event-form button:hover {
+    background-color: #ffc107;
+}
+
+button {
+    cursor: pointer;
+}
